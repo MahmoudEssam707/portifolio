@@ -88,7 +88,11 @@ function App() {
       <section id="home" className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 py-20 text-center">
           <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-lg">
-            <img src="https://drive.google.com/uc?export=view&id=1MDSFd8MNCc-M5qyxnQYvJygZDz-NdjYN" alt="Profile" className="w-full h-full object-cover" />
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQFx7en1Twv2zg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1725044401344?e=1756944000&v=beta&t=x3meq6Ha3EOBeQpSns1MMdQ77n7cTofi14T9pW0FeOg"
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4 flex items-center justify-center gap-3">
             Mahmoud Essam Fathy
