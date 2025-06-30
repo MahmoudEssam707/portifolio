@@ -88,7 +88,7 @@ function App() {
       <section id="home" className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 py-20 text-center">
           <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-lg">
-            <img src="/public/profile.jfif" alt="Profile" className="w-full h-full object-cover" />
+            <img src="https://drive.google.com/uc?export=view&id=1MDSFd8MNCc-M5qyxnQYvJygZDz-NdjYN" alt="Profile" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4 flex items-center justify-center gap-3">
             Mahmoud Essam Fathy
