@@ -185,7 +185,7 @@ function App() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-gray-800">AI Engineer Intern</h3>
-                  <h4 className="text-lg text-[#202439] font-medium">eSpace<span className='text-gray-500 font-normal'>Egypt, Alexandria</span></h4>
+                  <h4 className="text-lg text-[#202439] font-medium">eSpace <span className='text-gray-500 font-normal'>Egypt, Alexandria</span></h4>
                 </div>
                 <div className="text-gray-500 font-medium">Jul 2024 - Aug 2024</div>
               </div>
