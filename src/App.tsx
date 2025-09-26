@@ -184,6 +184,29 @@ function App() {
             <div className="bg-gray-50 p-6 rounded-lg">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                 <div>
+                  <h3 className="text-xl font-bold text-gray-800">AI Engineer Intern</h3>
+                  <h4 className="text-lg text-[#202439] font-medium">eSpace <span className='text-gray-500 font-normal'>Egypt, Alexandria</span></h4>
+                </div>
+                <div className="text-gray-500 font-medium">Jul 2024 - Aug 2024</div>
+              </div>
+                <ul className="text-gray-600 leading-relaxed list-disc ml-6">
+                  <li>
+                    Collaborated with the ATSO team to design and deliver an end-to-end AI software application, ensuring scalability and performance.
+                  </li>
+                  <li>
+                    Developed and deployed a Bayesian ML model to detect bots and frustrated users, and built an LLM-based recommender system to suggest suitable actions, strengthening security and decision-making.
+                  </li>
+                  <li>
+                    Automated workflows and API endpoint integrations using n8n, enabling full application automation, reducing manual effort, and improving operational efficiency.
+                  </li>
+                  <li>
+                    Utilized Docker for containerization and deployment, ensuring environment consistency and streamlining CI/CD pipelines.
+                  </li>
+                </ul>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                <div>
                   <h3 className="text-xl font-bold text-gray-800">Research and Development Engineer</h3>
                   <h4 className="text-lg text-[#202439] font-medium">Smart Technology <span className='text-gray-500 font-normal'>Egypt, Alexandria</span></h4>
                 </div>
@@ -444,7 +467,7 @@ function App() {
             <div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Technical Skills</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {["Cloud Computing (AWS)", "Scikit-learn", "TensorFlow", "River", "ETL", "DVC", "PyTorch", "NLP", "Mlflow", "FastAPI", "Apache Kafka", "Computer Vision", "Mobile App Development"].map(skill => (
+                {["Cloud Computing (AWS)", "Scikit-learn", "TensorFlow", "River", "ETL", "DVC", "PyTorch", "NLP", "Mlflow", "FastAPI", "Apache Kafka", "Computer Vision", "N8N Automation" ,"Mobile App Development"].map(skill => (
                   <span key={skill} className="text-gray-600 bg-gray-100 rounded-full px-3 py-1 text-base font-medium block text-center">
                     {skill}
                   </span>
