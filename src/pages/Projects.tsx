@@ -46,14 +46,7 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className="btn btn-sm btn-outline-primary"
                     >
-                      <i className="bi bi-github me-1"></i>Code
-                    </a>
-                    <a
-                      href={project.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-sm btn-primary"
-                    >
+                      <i className="bi bi-github me-1"></i>View Code
                     </a>
                   </div>
                 </div>
