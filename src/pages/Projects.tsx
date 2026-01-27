@@ -54,7 +54,6 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className="btn btn-sm btn-primary"
                     >
-                      <i className="bi bi-box-arrow-up-right me-1"></i>Live Demo
                     </a>
                   </div>
                 </div>
