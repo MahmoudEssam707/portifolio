@@ -34,7 +34,7 @@ export default function Projects() {
                   <p className="card-text text-muted">{project.description}</p>
                   <div className="mb-3">
                     {project.technologies.map((tech, idx) => (
-                      <span key={idx} className="badge bg-primary me-1">
+                      <span key={idx} className="badge bg-primary me-1" style={{ margin: '5px' }}>
                         {tech}
                       </span>
                     ))}

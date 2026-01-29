@@ -59,11 +59,6 @@ export default function Home() {
           <div className="row align-items-center min-vh-100">
             <div className="col-lg-10 mx-auto">
               <div className="hero-content-wrapper">
-                {/* Animated Greeting */}
-                <div className="hero-greeting animate__animated animate__fadeInDown">
-                  <span className="wave-emoji">👋</span>
-                  <span className="greeting-text">Hello, I'm</span>
-                </div>
 
                 {/* Animated Name with Gradient */}
                 <h1 className="hero-name animate__animated animate__fadeInUp">
