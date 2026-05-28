@@ -1,101 +1,118 @@
-import { Link, useLocation, Outlet } from 'react-router-dom';
-import portfolioData from '../data/portfolio.json';
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import portfolioData from "../data/portfolio.json";
+import BackToTop from "./BackToTop";
+
+const navItems = [
+  { label: "Home", to: "/" },
+  { label: "Skills", to: "/skills" },
+  { label: "Projects", to: "/projects" },
+  { label: "Contact", to: "/contact", isButton: true },
+];
 
 export default function Layout() {
   const location = useLocation();
-  const isActive = (path: string) => location.pathname === path;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   return (
-    <div className="app-container">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div className="container">
-          <Link className="navbar-brand fw-bold" to="/">
-            {portfolioData.personal.name}
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Link
-                  className={`nav-link ${isActive('/') ? 'active' : ''}`}
-                  to="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className={`nav-link ${isActive('/skills') ? 'active' : ''}`}
-                  to="/skills"
-                >
-                  Skills
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className={`nav-link ${isActive('/projects') ? 'active' : ''}`}
-                  to="/projects"
-                >
-                  Projects
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className={`nav-link ${isActive('/contact') ? 'active' : ''}`}
-                  to="/contact"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
+    <div className="app-shell" id="top">
+      <div className="ambient one"></div>
+      <div className="ambient two"></div>
+      <div className="ambient three"></div>
+
+      <nav className={`site-nav${scrolled ? " scrolled" : ""}`}>
+        <div className="container nav-inner">
+          <NavLink className="nav-logo" to="/">
+            // mahmoud_essam
+          </NavLink>
+          <div className="nav-links">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.label}
+                to={item.to}
+                className={({ isActive }) =>
+                  [
+                    item.isButton ? "btn ghost" : "",
+                    isActive ? "active" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </div>
+          <button
+            className={`nav-toggle${menuOpen ? " open" : ""}`}
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </nav>
+
+      <div className={`mobile-menu${menuOpen ? " open" : ""}`}>
+        <div className="menu-links">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.label}
+              to={item.to}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </div>
+      </div>
 
       <main>
         <Outlet />
       </main>
 
-      <footer className="footer-modern">
-        <div className="container">
-          <div className="row align-items-center py-4">
-            <div className="col-md-4 text-center text-md-start mb-3 mb-md-0">
-              <Link to="/" className="footer-brand">
-                {portfolioData.personal.name}
-              </Link>
-              <p className="footer-tagline mb-0">{portfolioData.personal.title}</p>
-            </div>
-            <div className="col-md-4 text-center mb-3 mb-md-0">
-              <div className="footer-social">
-                {portfolioData.contact.socialLinks.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-social-link"
-                    title={social.name}
-                  >
-                    <i className={`bi bi-${social.icon}`}></i>
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div className="col-md-4 text-center text-md-end">
-              <p className="footer-copyright mb-0">
-                &copy; {portfolioData.siteMeta.year} {portfolioData.siteMeta.copyright}
-              </p>
-            </div>
+      <footer className="site-footer">
+        <div className="container footer-inner">
+          <p>
+            {portfolioData.siteMeta.year} {portfolioData.siteMeta.copyright}
+          </p>
+          <div className="footer-links">
+            {portfolioData.contact.socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={social.name}
+              >
+                {social.name.slice(0, 2).toUpperCase()}
+              </a>
+            ))}
           </div>
         </div>
       </footer>
+
+      <BackToTop />
     </div>
   );
 }

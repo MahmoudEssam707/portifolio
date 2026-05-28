@@ -1,223 +1,118 @@
-import { useState, FormEvent } from 'react';
-import portfolioData from '../data/portfolio.json';
+import { FormEvent, useEffect, useRef, useState } from "react";
+import portfolioData from "../data/portfolio.json";
+import SectionHeader from "../components/SectionHeader";
+import ContactLink from "../components/ContactLink";
+import useReveal from "../components/hooks/useReveal";
+
+const EMPTY_FORM = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+};
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [alert, setAlert] = useState<{ type: string; message: string } | null>(null);
+  useReveal();
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const [formData, setFormData] = useState(EMPTY_FORM);
+  const [sent, setSent] = useState(false);
+  const timeoutRef = useRef<number | null>(null);
 
-    if (formData.name && formData.email && formData.message) {
-      setAlert({
-        type: 'success',
-        message: portfolioData.contact.successMessage,
-      });
-      setFormData({ name: '', email: '', message: '' });
-    } else {
-      setAlert({
-        type: 'error',
-        message: portfolioData.contact.errorMessage,
-      });
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    setSent(true);
+    setFormData(EMPTY_FORM);
+
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
     }
-
-    setTimeout(() => setAlert(null), 5000);
+    timeoutRef.current = window.setTimeout(() => setSent(false), 3000);
   };
 
   return (
-    <section
-      className="py-5"
-      style={{
-        marginTop: '70px',
-        background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
-        minHeight: '100vh',
-      }}
-    >
+    <section className="section page" id="contact">
       <div className="container">
-        <div className="text-center mb-5">
-          <h1 className="section-title" style={{ color: '#1a1a2e' }}>
-            {portfolioData.contact.heading}
-          </h1>
-          <p className="lead" style={{ color: '#4a5568' }}>
-            {portfolioData.contact.subheading}
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="03 - Contact"
+          title="Let's Collaborate"
+          subtitle={portfolioData.contact.subheading}
+        />
 
-        {alert && (
-          <div className="row">
-            <div className="col-lg-8 mx-auto">
-              <div
-                className={`alert alert-${alert.type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`}
-                role="alert"
-              >
-                {alert.message}
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setAlert(null)}
-                ></button>
-              </div>
-            </div>
+        <div className="contact-grid">
+          <div className="reveal">
+            <p className="contact-intro">{portfolioData.contact.subheading}</p>
+            {portfolioData.Data.contactLinks.map((link) => (
+              <ContactLink
+                key={link.label}
+                label={link.label}
+                value={link.value}
+                url={link.url}
+                // variant={link.variant}
+                tag={link.tag}
+              />
+            ))}
           </div>
-        )}
 
-        <div className="row">
-          <div className="col-lg-8 mx-auto">
-            <div className="row mb-5">
-              <div className="col-md-4 mb-4">
-                <div className="text-center">
-                  <div
-                    className="text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                    style={{
-                      width: '60px',
-                      height: '60px',
-                      background: 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)',
-                    }}
-                  >
-                    <i className="bi bi-envelope fs-4"></i>
-                  </div>
-                  <h5 style={{ color: '#1a1a2e' }}>Email</h5>
-                  <p style={{ color: '#4a5568' }}>{portfolioData.personal.email}</p>
-                </div>
-              </div>
-              <div className="col-md-4 mb-4">
-                <div className="text-center">
-                  <div
-                    className="text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                    style={{
-                      width: '60px',
-                      height: '60px',
-                      background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
-                    }}
-                  >
-                    <i className="bi bi-telephone fs-4"></i>
-                  </div>
-                  <h5 style={{ color: '#1a1a2e' }}>Phone</h5>
-                  <p style={{ color: '#4a5568' }}>{portfolioData.personal.phone}</p>
-                </div>
-              </div>
-              <div className="col-md-4 mb-4">
-                <div className="text-center">
-                  <div
-                    className="text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                    style={{
-                      width: '60px',
-                      height: '60px',
-                      background: 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)',
-                    }}
-                  >
-                    <i className="bi bi-geo-alt fs-4"></i>
-                  </div>
-                  <h5 style={{ color: '#1a1a2e' }}>Location</h5>
-                  <p style={{ color: '#4a5568' }}>{portfolioData.personal.location}</p>
-                </div>
-              </div>
+          <form className="card contact-form reveal" onSubmit={handleSubmit}>
+            <h3>{portfolioData.contact.formTitle}</h3>
+            <div className="form-row">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                required
+                value={formData.name}
+                onChange={(event) =>
+                  setFormData({ ...formData, name: event.target.value })
+                }
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+                value={formData.email}
+                onChange={(event) =>
+                  setFormData({ ...formData, email: event.target.value })
+                }
+              />
             </div>
-
-            <div className="card border-0 shadow-lg">
-              <div className="card-body p-5">
-                <h3 className="text-center mb-4">{portfolioData.contact.formTitle}</h3>
-                <form onSubmit={handleSubmit} className="contact-form">
-                  <div className="mb-4">
-                    <label htmlFor="name" className="form-label fw-semibold">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control form-control-lg"
-                      id="name"
-                      name="name"
-                      required
-                      placeholder="Enter your name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="email" className="form-label fw-semibold">
-                      Your Email
-                    </label>
-                    <input
-                      type="email"
-                      className="form-control form-control-lg"
-                      id="email"
-                      name="email"
-                      required
-                      placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="message" className="form-label fw-semibold">
-                      Your Message
-                    </label>
-                    <textarea
-                      className="form-control form-control-lg"
-                      id="message"
-                      name="message"
-                      rows={6}
-                      required
-                      placeholder="Enter your message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <button
-                      type="submit"
-                      className="btn btn-lg px-5"
-                      style={{
-                        background: 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)',
-                        border: 'none',
-                        color: 'white',
-                        borderRadius: '50px',
-                        fontWeight: 600,
-                        padding: '14px 50px',
-                        transition: 'all 0.3s ease',
-                      }}
-                    >
-                      <i className="bi bi-send me-2"></i>Send Message
-                    </button>
-                  </div>
-                </form>
-              </div>
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              required
+              value={formData.subject}
+              onChange={(event) =>
+                setFormData({ ...formData, subject: event.target.value })
+              }
+            />
+            <div style={{ marginTop: "var(--space-sm)" }}>
+              <textarea
+                name="message"
+                placeholder="Message"
+                required
+                value={formData.message}
+                onChange={(event) =>
+                  setFormData({ ...formData, message: event.target.value })
+                }
+              ></textarea>
             </div>
-
-            <div className="text-center mt-5">
-              <h4 className="mb-3" style={{ color: '#1a1a2e' }}>
-                Connect With Me
-              </h4>
-              <div className="d-flex justify-content-center gap-3">
-                {portfolioData.contact.socialLinks.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-lg social-link-btn"
-                    style={{
-                      border: '2px solid #4299e1',
-                      color: '#4299e1',
-                      borderRadius: '50px',
-                      width: '60px',
-                      height: '60px',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      transition: 'all 0.3s ease',
-                    }}
-                  >
-                    <i className={`bi bi-${social.icon} fs-5`}></i>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
+            <button
+              type="submit"
+              className={`btn primary${sent ? " sent" : ""}`}
+            >
+              {sent ? "Sent!" : "Send Message"}
+            </button>
+          </form>
         </div>
       </div>
     </section>
