@@ -2,6 +2,7 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import portfolioData from "../data/portfolio.json";
 import BackToTop from "./BackToTop";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -58,6 +59,7 @@ export default function Layout() {
                 {item.label}
               </NavLink>
             ))}
+            <ThemeToggle />
           </div>
           <button
             className={`nav-toggle${menuOpen ? " open" : ""}`}

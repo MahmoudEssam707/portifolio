@@ -5,6 +5,7 @@ import TimelineItem from "../components/TimelineItem";
 import PublicationCard from "../components/PublicationCard";
 import useReveal from "../components/hooks/useReveal";
 import useTypedRoles from "../components/hooks/useTypedRoles";
+import NeuralDivider from "../components/NeuralDivider";
 
 export default function Home() {
   useReveal();
@@ -87,6 +88,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="container">
+        <NeuralDivider />
+      </div>
+
       <section className="section" id="experience">
         <div className="container">
           <SectionHeader
@@ -110,6 +115,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="container">
+        <NeuralDivider />
+      </div>
 
       <section className="section alt" id="research">
         <div className="container">
