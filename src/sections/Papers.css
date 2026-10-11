@@ -1,0 +1,63 @@
+.refs {
+  display: grid;
+  gap: 32px;
+  list-style: none;
+}
+
+.ref {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 8px;
+}
+
+.ref__n {
+  font-family: var(--mono);
+  font-size: var(--fs-small);
+  color: var(--accent);
+  padding-top: 0.15em;
+}
+
+.ref__body {
+  display: grid;
+  gap: 8px;
+}
+
+.ref__title {
+  max-width: 50ch;
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.ref__link {
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition:
+    color 0.2s var(--ease),
+    text-decoration-color 0.2s var(--ease);
+}
+.ref__link:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+.ref__arrow {
+  display: inline-block;
+  margin-left: 6px;
+  vertical-align: -0.1em;
+  color: var(--text-mute);
+}
+.ref__link:hover .ref__arrow {
+  color: var(--accent);
+}
+
+.ref__abstract {
+  max-width: 64ch;
+  color: var(--text-dim);
+}
+
+.ref__highlight {
+  color: var(--text-dim);
+}

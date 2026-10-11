@@ -1,10 +1,15 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  optimizeDeps: {
-    exclude: ['lucide-react'],
+  build: {
+    target: "es2020",
+    cssCodeSplit: false,
+  },
+  ssr: {
+    // Bundle CSS-only packages into the SSR build so Node never imports .css.
+    noExternal: [/^@fontsource/],
   },
 });

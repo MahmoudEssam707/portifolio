@@ -1,0 +1,53 @@
+.about {
+  display: grid;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.about__text {
+  display: grid;
+  gap: 18px;
+  max-width: 60ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+.about__text p + p {
+  color: var(--text-dim);
+}
+
+/* pandas DataFrame look */
+.df {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.df th,
+.df td {
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.df thead th {
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 1px solid var(--border-strong);
+}
+.df tbody th {
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.df tbody tr:nth-child(odd) {
+  background: var(--bg-elev);
+}
+.df tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+@media (min-width: 1000px) {
+  .about {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+}

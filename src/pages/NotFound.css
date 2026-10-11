@@ -1,0 +1,35 @@
+.not-found {
+  min-height: 80svh;
+  padding-top: calc(var(--nav-h) + env(safe-area-inset-top) + 24px);
+}
+
+.not-found .cell {
+  border-top: 0;
+}
+
+.traceback {
+  margin-bottom: 28px;
+  padding: 14px;
+  overflow-x: auto;
+  border-left: 2px solid #ff6b6b;
+  background: color-mix(in srgb, #ff6b6b 6%, transparent);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.traceback__rule {
+  color: #ff6b6b;
+}
+
+.traceback__err {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.not-found__text {
+  margin-bottom: 24px;
+  font-size: var(--fs-lead);
+  color: var(--text-dim);
+}

@@ -1,0 +1,73 @@
+/* Design tokens. Dark is the default; [data-theme] is set pre-paint in index.html. */
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0d10;
+  --bg-elev: #12151a;          /* code input area */
+  --bg-hover: #161a20;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #eceef2;
+  --text-dim: #a3abb8;
+  --text-mute: #788192;
+  --accent: #7c86ff;
+  --accent-soft: #a5acff;
+  --on-accent: #0b0d10;
+  --track: rgba(255, 255, 255, 0.06);   /* metric bar track */
+  --nav-bg: rgba(11, 13, 16, 0.78);
+  --grain-opacity: 0.035;
+
+  /* Python syntax colours for code cells */
+  --syn-kw: #c49bff;
+  --syn-fn: #7cc4ff;
+  --syn-str: #9be39b;
+  --syn-num: #ffb38a;
+  --syn-com: #7d8598;
+  --syn-op: #a3abb8;
+
+  --sans: "Inter Tight Variable", "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --fs-label: 0.75rem;
+  --fs-small: 0.875rem;
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --fs-lead: clamp(1.125rem, 1.02rem + 0.5vw, 1.375rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --fs-h2: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+
+  --container: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --prompt: 92px;               /* In [n]: column on desktop */
+  --cell-y: clamp(56px, 8vw, 104px);
+  --nav-h: 60px;
+  --radius: 6px;
+
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #fbfbf9;
+  --bg-elev: #f1f1ed;
+  --bg-hover: #ecece7;
+  --border: rgba(16, 18, 24, 0.09);
+  --border-strong: rgba(16, 18, 24, 0.18);
+  --text: #111318;
+  --text-dim: #4a515e;
+  --text-mute: #646b78;
+  --accent: #4f57e8;
+  --accent-soft: #3a42d1;
+  --on-accent: #ffffff;
+  --track: rgba(16, 18, 24, 0.07);
+  --nav-bg: rgba(251, 251, 249, 0.82);
+  --grain-opacity: 0.02;
+
+  --syn-kw: #8a3fd1;
+  --syn-fn: #1f6fd1;
+  --syn-str: #1d8a3a;
+  --syn-num: #c2510f;
+  --syn-com: #6c727e;
+  --syn-op: #4a515e;
+}
