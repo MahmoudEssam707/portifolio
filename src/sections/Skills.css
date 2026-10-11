@@ -1,0 +1,41 @@
+.skills tbody th,
+.skills td {
+  padding-block: 16px;
+}
+
+.skills tbody th {
+  white-space: normal;
+}
+
+.skills__note {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--sans);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--text-mute);
+}
+
+/* Stack the two columns on narrow screens */
+@media (max-width: 719px) {
+  .skills thead {
+    display: none;
+  }
+  .skills tr,
+  .skills th,
+  .skills td {
+    display: block;
+  }
+  .skills tbody th {
+    padding-bottom: 8px;
+  }
+  .skills td {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 720px) {
+  .skills tbody th {
+    width: 200px;
+  }
+}

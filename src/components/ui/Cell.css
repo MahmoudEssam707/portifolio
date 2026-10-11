@@ -1,0 +1,133 @@
+.cell {
+  position: relative;
+  padding-block: var(--cell-y);
+  border-top: 1px solid var(--border);
+}
+
+.cell__inner {
+  position: relative;
+}
+
+/* Jupyter's "selected cell" bar: shows on the cell in the middle of the viewport */
+.cell__inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: max(calc(var(--gutter) - 14px), 4px);
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s var(--ease-out);
+}
+.cell.is-active .cell__inner::before {
+  transform: scaleY(1);
+}
+
+.cell__prompt {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.cell__prompt--out {
+  color: var(--text-mute);
+}
+
+/* Execution count: [ ] before running, [*] while running, [n] when done */
+.cell__count::before {
+  content: attr(data-n);
+}
+.js .cell:not(.is-run) .cell__count::before {
+  content: "\00a0";
+}
+.js .cell.is-running .cell__count::before {
+  content: "*";
+}
+
+.cell__in {
+  display: grid;
+  gap: 8px;
+}
+
+.cell__code {
+  margin: 0;
+  padding: 12px 14px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  scrollbar-width: none;
+}
+.cell__code::-webkit-scrollbar {
+  display: none;
+}
+
+.cell__out {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.js .cell__out {
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.8s var(--ease-out);
+}
+.js .cell:not(.is-run) .cell__out {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+}
+
+.cell__body {
+  min-width: 0;
+}
+
+.cell__title {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.cell__lead {
+  max-width: 60ch;
+  margin-bottom: clamp(28px, 4vw, 44px);
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+/* Syntax colours */
+.syn-kw { color: var(--syn-kw); }
+.syn-fn { color: var(--syn-fn); }
+.syn-str { color: var(--syn-str); }
+.syn-num { color: var(--syn-num); }
+.syn-com { color: var(--syn-com); font-style: italic; }
+.syn-op { color: var(--syn-op); }
+
+@media (min-width: 900px) {
+  .cell__in,
+  .cell__out {
+    grid-template-columns: var(--prompt) minmax(0, 1fr);
+    gap: 0;
+    align-items: start;
+  }
+  .cell__prompt {
+    padding-top: 13px;
+    padding-right: 14px;
+    text-align: right;
+  }
+  .cell__prompt--out {
+    padding-top: 0.6em;
+  }
+  .cell__inner::before {
+    left: calc(var(--gutter) - 18px);
+  }
+}

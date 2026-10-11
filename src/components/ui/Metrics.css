@@ -1,0 +1,65 @@
+.metrics {
+  display: grid;
+  gap: 14px;
+}
+
+.metric {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 16px;
+  row-gap: 6px;
+}
+
+.metric__label {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  color: var(--text-mute);
+}
+
+.metric__value {
+  font-family: var(--mono);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.metric__bar {
+  grid-column: 1 / -1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.metric__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(var(--v));
+}
+
+/* Animate the fill once its card/cell is shown (JS only; static otherwise). */
+.js .metric__fill {
+  transform: scaleX(0);
+  transition: transform 1.2s var(--ease-out) 0.15s;
+}
+.js .is-visible .metric__fill,
+.js .is-run .metric__fill {
+  transform: scaleX(var(--v));
+}
+
+.metrics--large {
+  gap: 22px;
+}
+.metrics--large .metric__value {
+  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.5rem);
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.metrics--large .metric__bar {
+  height: 6px;
+}

@@ -27,3 +27,5 @@ dist-ssr
 # github folder
 .github/
 AGENTS.md
+# TypeScript build info
+*.tsbuildinfo
