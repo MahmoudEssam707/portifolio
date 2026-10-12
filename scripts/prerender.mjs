@@ -18,9 +18,9 @@ for (const marker of ["<!--app-head-->", "<!--app-html-->"]) {
 
 const { render, paths, siteUrl } = await import(pathToFileURL(path.join(ssrDir, "entry-server.js")).href);
 
-// Preload the font used by the hero headline (the LCP element).
+// Preload the hero headline font (the LCP element) and the mono UI font.
 const assets = await fs.readdir(path.join(dist, "assets"));
-const preloads = [/^inter-tight-latin-wght-normal-.*\.woff2$/]
+const preloads = [/^inter-tight-latin-wght-normal-.*\.woff2$/, /^jetbrains-mono-latin-wght-normal-.*\.woff2$/]
   .map((pattern) => assets.find((file) => pattern.test(file)))
   .filter(Boolean)
   .map((file) => `<link rel="preload" href="/assets/${file}" as="font" type="font/woff2" crossorigin />`);

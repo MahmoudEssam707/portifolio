@@ -11,8 +11,8 @@ html[data-loader] .loader {
   padding: var(--gutter);
   background: var(--bg);
   transition:
-    opacity 0.5s var(--ease-out),
-    visibility 0.5s;
+    opacity 0.3s var(--ease-out),
+    visibility 0.3s;
   /* Failsafe: never trap the page if the JS bundle fails to load. */
   animation: loader-failsafe 0s linear 3s forwards;
 }
@@ -55,11 +55,11 @@ html[data-loader] .loader.is-done {
   font-variant-numeric: tabular-nums;
 }
 
-/* Hold the hero reveal until the loader lifts. */
-html[data-loader] .reveal-lines.is-visible .line > span {
+/* Hold the hero reveal until the loader starts lifting (data-loader="done"). */
+html[data-loader=""] .reveal-lines.is-visible .line > span {
   transform: translate3d(0, 105%, 0);
 }
-html[data-loader] .hero .reveal-up.is-visible {
+html[data-loader=""] .hero .reveal-up.is-visible {
   opacity: 0;
-  transform: translate3d(0, 20px, 0);
+  transform: translate3d(0, 12px, 0);
 }

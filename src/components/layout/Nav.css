@@ -13,8 +13,8 @@
 .nav.is-open {
   background: var(--nav-bg);
   border-bottom-color: var(--border);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .nav__inner {

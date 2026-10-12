@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import "./Loader.css";
 
-const COUNT_MS = 1000;
-const MIN_MS = 900;
-const MAX_MS = 1600;
+const COUNT_MS = 550;
+const MIN_MS = 450;
+const MAX_MS = 900;
+const FADE_MS = 300; // keep in sync with Loader.css
 const CELLS = 24;
 
 /**
@@ -54,8 +55,9 @@ export default function Loader() {
       } catch {
         // Ignore: the intro will simply replay next visit.
       }
-      // Removing the attribute releases the hero reveal.
-      window.setTimeout(() => html.removeAttribute("data-loader"), 200);
+      // "done" releases the hero reveal while the overlay fades; then unmount it.
+      html.setAttribute("data-loader", "done");
+      window.setTimeout(() => html.removeAttribute("data-loader"), FADE_MS);
     };
 
     const fontsReady = document.fonts?.ready ?? Promise.resolve();

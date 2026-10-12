@@ -14,7 +14,7 @@
   --accent-soft: #a5acff;
   --on-accent: #0b0d10;
   --track: rgba(255, 255, 255, 0.06);   /* metric bar track */
-  --nav-bg: rgba(11, 13, 16, 0.78);
+  --nav-bg: rgba(11, 13, 16, 0.86);
   --grain-opacity: 0.035;
 
   /* Python syntax colours for code cells */
@@ -61,7 +61,7 @@
   --accent-soft: #3a42d1;
   --on-accent: #ffffff;
   --track: rgba(16, 18, 24, 0.07);
-  --nav-bg: rgba(251, 251, 249, 0.82);
+  --nav-bg: rgba(251, 251, 249, 0.88);
   --grain-opacity: 0.02;
 
   --syn-kw: #8a3fd1;

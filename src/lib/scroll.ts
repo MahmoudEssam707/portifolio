@@ -12,10 +12,15 @@ export const getLenis = () => lenis;
 /** Scroll to an element (honouring the fixed nav) or to the top. */
 export function scrollToTarget(target: HTMLElement | null, { immediate = false } = {}) {
   if (lenis) {
+    if (immediate) {
+      // Jumps happen right after a route change, before Lenis' ResizeObserver
+      // has seen the new page height — refresh it so the target isn't clamped.
+      lenis.resize();
+    }
     lenis.scrollTo(target ?? 0, {
       offset: target ? -navOffset() : 0,
       immediate,
-      duration: 1.2,
+      duration: 0.8,
     });
     return;
   }

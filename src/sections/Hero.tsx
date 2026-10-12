@@ -31,7 +31,7 @@ export default function Hero() {
             <Lines lines={person.name.split(" ")} />
           </h1>
 
-          <p className="hero__meta mono-label reveal-up" style={delay(0.2)}>
+          <p className="hero__meta mono-label reveal-up" style={delay(0.1)}>
             <span className="accent">{person.role}</span>
             <span>{person.location}</span>
             <span>
@@ -39,11 +39,11 @@ export default function Hero() {
             </span>
           </p>
 
-          <p className="hero__intro reveal-up" style={delay(0.3)}>
+          <p className="hero__intro reveal-up" style={delay(0.15)}>
             {hero.intro}
           </p>
 
-          <div className="hero__actions reveal-up" style={delay(0.4)}>
+          <div className="hero__actions reveal-up" style={delay(0.2)}>
             <Link className="btn btn--primary" to="/#work">
               See projects <Icon name="arrowRight" size={16} />
             </Link>
@@ -53,7 +53,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <figure className="hero__photo reveal-up" style={delay(0.5)}>
+        <figure className="hero__photo reveal-up" style={delay(0.25)}>
           <img
             src={person.photo.src}
             alt={`Portrait of ${person.name}`}
