@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useLocation } from "react-router-dom";
+import useIsoLayoutEffect from "../../hooks/useIsoLayoutEffect";
 import { scrollToTarget } from "../../lib/scroll";
 
 /**
@@ -8,12 +9,13 @@ import { scrollToTarget } from "../../lib/scroll";
  * - "#section" on the same page → smooth scroll to it
  * - "#section" on a different page (e.g. /#work from a project) → jump to it
  * The first render is left to the browser, which already handles deep links.
+ * Runs before paint so a new page never flashes at the old scroll position.
  */
 export default function ScrollManager() {
   const { pathname, hash, key } = useLocation();
   const previousPath = useRef<string | null>(null);
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     const samePage = previousPath.current === pathname;
     const firstRender = previousPath.current === null;
     previousPath.current = pathname;

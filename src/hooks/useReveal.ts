@@ -1,18 +1,31 @@
-import { useEffect } from "react";
+import { useRef } from "react";
 import { prefersReducedMotion } from "../lib/motion";
+import useIsoLayoutEffect from "./useIsoLayoutEffect";
 
 const REVEAL = ".reveal-up:not(.is-visible), .reveal-lines:not(.is-visible)";
 const CELL = ".cell";
-const RUN_MS = 420;
+const RUN_MS = 160;
+
+const inViewport = (el: Element) => {
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight && rect.bottom > 0;
+};
 
 /**
  * Scroll-driven page motion. Re-runs whenever `key` changes (pass the path).
  * - `.reveal-up` / `.reveal-lines` get `.is-visible` when they enter view.
  * - `.cell`s "execute": `.is-running` briefly, then `.is-run` (shows output).
  * - The cell crossing the middle of the viewport gets `.is-active`.
+ * After a route change, whatever is already on screen is shown before the
+ * first paint, so navigating never flashes an empty page.
  */
 export default function useReveal(key: string) {
-  useEffect(() => {
+  const previousKey = useRef<string | null>(null);
+
+  useIsoLayoutEffect(() => {
+    const routeChanged = previousKey.current !== null && previousKey.current !== key;
+    previousKey.current = key;
+
     const reveals = Array.from(document.querySelectorAll<HTMLElement>(REVEAL));
     const cells = Array.from(document.querySelectorAll<HTMLElement>(CELL));
 
@@ -20,6 +33,17 @@ export default function useReveal(key: string) {
       reveals.forEach((el) => el.classList.add("is-visible"));
       cells.forEach((el) => el.classList.add("is-run"));
       return;
+    }
+
+    if (routeChanged) {
+      // Measuring already committed the hidden styles, so suppress transitions
+      // while the on-screen elements switch to their final state.
+      const html = document.documentElement;
+      html.classList.add("reveal-instant");
+      reveals.filter(inViewport).forEach((el) => el.classList.add("is-visible"));
+      cells.filter(inViewport).forEach((el) => el.classList.add("is-run"));
+      void html.offsetHeight;
+      html.classList.remove("reveal-instant");
     }
 
     const timers: number[] = [];
@@ -33,7 +57,7 @@ export default function useReveal(key: string) {
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      { rootMargin: "0px 0px -4% 0px", threshold: 0.01 }
     );
 
     const runObserver = new IntersectionObserver(
@@ -53,7 +77,7 @@ export default function useReveal(key: string) {
           );
         }
       },
-      { rootMargin: "0px 0px -15% 0px", threshold: 0 }
+      { rootMargin: "0px 0px -5% 0px", threshold: 0 }
     );
 
     const activeObserver = new IntersectionObserver(
@@ -65,7 +89,11 @@ export default function useReveal(key: string) {
       { rootMargin: "-45% 0px -50% 0px" }
     );
 
-    reveals.forEach((el) => revealObserver.observe(el));
+    reveals.forEach((el) => {
+      if (!el.classList.contains("is-visible")) {
+        revealObserver.observe(el);
+      }
+    });
     cells.forEach((cell) => {
       if (!cell.classList.contains("is-run")) {
         runObserver.observe(cell);

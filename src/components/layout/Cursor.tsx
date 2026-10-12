@@ -22,8 +22,8 @@ export default function Cursor() {
     let frame = 0;
 
     const render = () => {
-      pos.x += (target.x - pos.x) * 0.22;
-      pos.y += (target.y - pos.y) * 0.22;
+      pos.x += (target.x - pos.x) * 0.4;
+      pos.y += (target.y - pos.y) * 0.4;
       el.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
       if (Math.abs(target.x - pos.x) > 0.1 || Math.abs(target.y - pos.y) > 0.1) {
         frame = requestAnimationFrame(render);

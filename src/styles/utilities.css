@@ -95,10 +95,10 @@
  * visible without JS. Reduced motion is handled in useReveal. */
 .js .reveal-up {
   opacity: 0;
-  transform: translate3d(0, 20px, 0);
+  transform: translate3d(0, 12px, 0);
   transition:
-    opacity 0.8s var(--ease-out),
-    transform 0.9s var(--ease-out);
+    opacity 0.5s var(--ease-out),
+    transform 0.55s var(--ease-out);
   transition-delay: var(--delay, 0s);
 }
 .js .reveal-up.is-visible {
@@ -118,11 +118,17 @@
 }
 .js .reveal-lines .line > span {
   transform: translate3d(0, 105%, 0);
-  transition: transform 1.1s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 0.08s + var(--delay, 0s));
+  transition: transform 0.7s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 0.05s + var(--delay, 0s));
 }
 .js .reveal-lines.is-visible .line > span {
   transform: none;
+}
+
+/* Set for one frame by useReveal after a route change: show on-screen content as-is. */
+.reveal-instant *,
+.reveal-instant *::before {
+  transition: none !important;
 }
 
 .skip-link {

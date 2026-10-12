@@ -10,7 +10,7 @@ export default function useLenis() {
       return;
     }
 
-    const lenis = new Lenis({ autoRaf: true, lerp: 0.1, wheelMultiplier: 1 });
+    const lenis = new Lenis({ autoRaf: true, lerp: 0.14, wheelMultiplier: 1 });
     setLenis(lenis);
 
     return () => {
