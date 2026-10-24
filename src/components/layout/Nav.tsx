@@ -8,12 +8,12 @@ import ThemeToggle from "../ui/ThemeToggle";
 import "./Nav.css";
 
 const NAV_ITEMS = [
-  { id: "about", label: "about" },
-  { id: "experience", label: "experience" },
-  { id: "work", label: "projects" },
-  { id: "skills", label: "skills" },
-  { id: "papers", label: "papers" },
-  { id: "contact", label: "contact" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "work", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "papers", label: "Papers" },
+  { id: "contact", label: "Contact" },
 ] as const;
 
 /** Highlights the nav item whose section is in the middle band of the viewport. */
@@ -98,42 +98,51 @@ export default function Nav() {
 
   return (
     <header className={`nav${scrolled ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
-      <div className="nav__inner container">
-        <Link to="/" className="nav__logo" aria-label={`${data.person.name}, home`}>
-          <Logo size={28} />
-          <span className="nav__name">
-            {data.person.name}
-            <span className="nav__role">{data.person.role}</span>
-          </span>
-        </Link>
+      <div className="container">
+        <div className="nav__inner">
+          <Link to="/" className="nav__logo" aria-label={`${data.person.name}, home`}>
+            <Logo size={28} />
+            <span className="nav__name">
+              {data.person.name}
+              <span className="nav__role">{data.person.role}</span>
+            </span>
+          </Link>
 
-        <nav className="nav__links" aria-label="Primary">
-          {NAV_ITEMS.map((item) => (
+          <nav className="nav__links" aria-label="Primary">
+            {NAV_ITEMS.filter((item) => item.id !== "contact").map((item) => (
+              <Link
+                key={item.id}
+                to={`/#${item.id}`}
+                className="nav__link"
+                aria-current={active === item.id ? "true" : undefined}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="nav__actions">
+            <ThemeToggle />
             <Link
-              key={item.id}
-              to={`/#${item.id}`}
-              className="nav__link"
-              aria-current={active === item.id ? "true" : undefined}
+              to="/#contact"
+              className="btn btn--primary btn--sm nav__cta"
+              aria-current={active === "contact" ? "true" : undefined}
             >
-              {item.label}
+              Let's talk
             </Link>
-          ))}
-        </nav>
-
-        <div className="nav__actions">
-          <ThemeToggle />
-          <button
-            ref={toggleRef}
-            type="button"
-            className="nav__burger icon-btn"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((value) => !value)}
-          >
-            <span />
-            <span />
-          </button>
+            <button
+              ref={toggleRef}
+              type="button"
+              className="nav__burger icon-btn"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              onClick={() => setOpen((value) => !value)}
+            >
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -147,14 +156,13 @@ export default function Nav() {
         aria-modal="true"
       >
         <nav className="mobile-menu__links container" aria-label="Mobile">
-          {NAV_ITEMS.map((item, i) => (
+          {NAV_ITEMS.map((item) => (
             <Link key={item.id} to={`/#${item.id}`} className="mobile-menu__link">
-              <span className="mobile-menu__n">[{i + 2}]</span>
               {item.label}
             </Link>
           ))}
         </nav>
-        <div className="mobile-menu__foot container mono-label">
+        <div className="mobile-menu__foot container">
           <a href={`mailto:${data.person.email}`}>{data.person.email}</a>
         </div>
       </div>

@@ -25,10 +25,11 @@ html.lenis body {
 }
 
 body {
+  position: relative;
   min-height: 100svh;
   font-family: var(--sans);
   font-size: var(--fs-body);
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--text);
   background: var(--bg);
   overflow-x: clip;
@@ -38,17 +39,25 @@ body {
   transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
 }
 
-/* Film grain */
+/* Faint engineering grid behind the top of the page, fading out downwards. */
 body::before {
   content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 50;
+  position: absolute;
+  inset: 0 0 auto;
+  height: min(1400px, 160vh, 100%); /* never taller than the page itself */
+  z-index: -1;
   pointer-events: none;
-  opacity: var(--grain-opacity);
-  transform: translateZ(0); /* own layer: painted once, not with every scroll */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center top;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+
+#root {
+  isolation: isolate;
 }
 
 ::selection {
@@ -78,9 +87,9 @@ button {
 h1,
 h2,
 h3 {
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
@@ -91,14 +100,7 @@ p {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 4px;
-}
-
-/* Custom cursor is active: hide the native one except on text inputs. */
-html.has-cursor,
-html.has-cursor a,
-html.has-cursor button {
-  cursor: none;
+  border-radius: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {

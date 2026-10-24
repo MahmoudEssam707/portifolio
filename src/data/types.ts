@@ -77,14 +77,25 @@ export type Portfolio = {
     photo: {
       /** Served path of the portrait */
       src: string;
-      /** GitHub username the build syncs the avatar from */
-      github: string;
-      /** Square size in px that GitHub serves (460 for original uploads) */
+      /**
+       * GitHub username the build syncs the avatar from. GitHub caps avatars at
+       * 460px, so leave it unset to keep a higher-resolution local photo.
+       */
+      github?: string;
+      /** Square size of the image in px */
       size: number;
     };
   };
   hero: {
+    /** Short availability line in the pill above the name */
+    status: string;
+    /** Headline under the name; `highlight` is drawn in the accent gradient */
+    tagline: { text: string; highlight: string };
     intro: string;
+    /** Headline numbers; only real, published figures */
+    stats: { value: string; label: string }[];
+    /** A few focus areas floated around the portrait */
+    focus: string[];
   };
   about: {
     paragraphs: string[];

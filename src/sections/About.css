@@ -1,53 +1,55 @@
 .about {
   display: grid;
-  gap: clamp(32px, 5vw, 56px);
-  align-items: start;
+  gap: clamp(32px, 5vw, 64px);
 }
 
 .about__text {
   display: grid;
-  gap: 18px;
-  max-width: 60ch;
+  gap: 20px;
+  max-width: 62ch;
   font-size: var(--fs-lead);
-  line-height: 1.55;
-}
-.about__text p + p {
+  line-height: 1.65;
   color: var(--text-dim);
+}
+.about__text p:first-child {
+  color: var(--text);
 }
 
-/* pandas DataFrame look */
-.df {
-  width: 100%;
-  border-collapse: collapse;
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  gap: 12px;
+  align-content: start;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px;
+  border-radius: var(--r);
+}
+.fact dt {
   font-family: var(--mono);
-  font-size: 0.8125rem;
-  line-height: 1.5;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mute);
 }
-.df th,
-.df td {
-  padding: 9px 12px;
-  text-align: left;
-  vertical-align: top;
-}
-.df thead th {
-  font-weight: 600;
+.fact dd {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
   color: var(--text);
-  border-bottom: 1px solid var(--border-strong);
 }
-.df tbody th {
-  font-weight: 600;
-  color: var(--text-dim);
-  white-space: nowrap;
-}
-.df tbody tr:nth-child(odd) {
-  background: var(--bg-elev);
-}
-.df tbody tr:hover {
-  background: var(--bg-hover);
+/* Long values get a full row; dense packing back-fills the gaps. */
+.fact--wide {
+  grid-column: 1 / -1;
 }
 
 @media (min-width: 1000px) {
   .about {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   }
 }

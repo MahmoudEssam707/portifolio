@@ -1,20 +1,10 @@
+/* Floating glass bar: transparent at the top, a blurred pill once scrolled. */
 .nav {
   position: fixed;
   inset: 0 0 auto;
   z-index: 40;
-  padding-top: env(safe-area-inset-top);
-  border-bottom: 1px solid transparent;
-  transition:
-    background-color 0.3s var(--ease),
-    border-color 0.3s var(--ease);
-}
-
-.nav.is-scrolled,
-.nav.is-open {
-  background: var(--nav-bg);
-  border-bottom-color: var(--border);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding-top: calc(env(safe-area-inset-top) + 12px);
+  pointer-events: none;
 }
 
 .nav__inner {
@@ -22,7 +12,25 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  height: var(--nav-h);
+  height: calc(var(--nav-h) - 20px);
+  margin-inline: -14px;
+  padding-inline: 14px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  pointer-events: auto;
+  transition:
+    background-color 0.3s var(--ease),
+    border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+.nav.is-scrolled .nav__inner,
+.nav.is-open .nav__inner {
+  border-color: var(--border);
+  background: var(--nav-bg);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
 }
 
 .nav__logo {
@@ -35,19 +43,18 @@
 .nav__name {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   line-height: 1.1;
 }
 
 .nav__role {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   color: var(--text-mute);
 }
 
@@ -61,27 +68,16 @@
   gap: 4px;
 }
 
-.icon-btn {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius);
-  color: var(--text-dim);
-  transition:
-    color 0.2s var(--ease),
-    background-color 0.2s var(--ease);
-}
-.icon-btn:hover {
-  color: var(--text);
-  background: var(--bg-hover);
+.nav__cta {
+  display: none;
 }
 
 /* Two-line burger morphing into an X */
 .nav__burger span {
   grid-area: 1 / 1;
-  width: 20px;
+  width: 18px;
   height: 1.5px;
+  border-radius: 1px;
   background: var(--text);
   transition: transform 0.4s var(--ease-out);
 }
@@ -101,13 +97,15 @@
 /* ---- Mobile menu ---- */
 .mobile-menu {
   position: fixed;
-  inset: calc(var(--nav-h) + env(safe-area-inset-top)) 0 0;
+  inset: 0;
+  z-index: -1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-block: 24px max(32px, env(safe-area-inset-bottom));
+  padding: calc(var(--nav-h) + env(safe-area-inset-top) + 24px) 0 max(32px, env(safe-area-inset-bottom));
   background: var(--bg);
   overflow-y: auto;
+  pointer-events: auto;
   animation: menu-in 0.35s var(--ease-out);
 }
 .mobile-menu[hidden] {
@@ -128,18 +126,19 @@
 
 .mobile-menu__link {
   display: flex;
-  align-items: baseline;
-  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
   padding-block: 14px;
   border-bottom: 1px solid var(--border);
-  font-family: var(--mono);
-  font-size: clamp(1.5rem, 7vw, 2.25rem);
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
   line-height: 1.1;
 }
-.mobile-menu__n {
-  min-width: 2.6ch;
-  font-size: 0.875rem;
-  color: var(--accent);
+.mobile-menu__link::after {
+  content: "→";
+  font-size: 0.6em;
+  color: var(--text-mute);
 }
 .mobile-menu__link:active {
   color: var(--accent);
@@ -148,6 +147,7 @@
 .mobile-menu__foot a {
   display: inline-block;
   padding-block: 12px;
+  font-size: var(--fs-small);
   color: var(--text-dim);
 }
 
@@ -159,13 +159,15 @@ html.menu-open {
   .nav__links {
     display: flex;
     gap: 2px;
+    padding: 4px;
+    border-radius: var(--r-pill);
   }
 
   .nav__link {
-    padding: 8px 12px;
-    border-radius: var(--radius);
-    font-family: var(--mono);
-    font-size: 0.8125rem;
+    padding: 8px 14px;
+    border-radius: var(--r-pill);
+    font-size: 0.875rem;
+    font-weight: 500;
     color: var(--text-dim);
     transition:
       color 0.2s var(--ease),
@@ -176,7 +178,13 @@ html.menu-open {
     background: var(--bg-hover);
   }
   .nav__link[aria-current] {
-    color: var(--accent);
+    color: var(--text);
+    background: var(--bg-hover);
+  }
+
+  .nav__cta {
+    display: inline-flex;
+    margin-left: 4px;
   }
 
   .nav__burger,

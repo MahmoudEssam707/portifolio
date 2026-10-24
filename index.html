@@ -4,34 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="dark light" />
-    <meta name="theme-color" content="#05070a" />
+    <meta name="theme-color" content="#07080c" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <script>
-      // Pre-paint: theme (no flash), JS flag for reveal styles, first-visit loader gate.
+      // Pre-paint: theme (no flash) and the JS flag for reveal styles.
       (function () {
         var d = document.documentElement;
         d.classList.add("js");
         var theme = "dark";
         try {
           var saved = localStorage.getItem("theme");
-          theme = saved === "light" || saved === "dark" ? saved
-            : matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          if (saved === "light" || saved === "dark") theme = saved;
         } catch (e) {}
         d.setAttribute("data-theme", theme);
-        document.querySelector('meta[name="theme-color"]').setAttribute("content", theme === "light" ? "#f6f6f3" : "#05070a");
-        try {
-          if (location.pathname === "/" && !sessionStorage.getItem("intro-seen") &&
-              !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            d.setAttribute("data-loader", "");
-          }
-        } catch (e) {}
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", theme === "light" ? "#f7f7fb" : "#07080c");
         // Failsafe: if the app never boots, drop the JS-only hidden states.
         setTimeout(function () {
           if (!window.__booted) {
             d.classList.remove("js");
-            d.removeAttribute("data-loader");
           }
         }, 4000);
       })();

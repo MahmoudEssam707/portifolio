@@ -1,3 +1,4 @@
+/* Compact (cards): label/value rows with a thin bar. Large (project page): stat tiles. */
 .metrics {
   display: grid;
   gap: 14px;
@@ -8,18 +9,17 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
   column-gap: 16px;
-  row-gap: 6px;
+  row-gap: 8px;
 }
 
 .metric__label {
-  font-family: var(--mono);
-  font-size: var(--fs-label);
+  font-size: var(--fs-small);
   color: var(--text-mute);
 }
 
 .metric__value {
-  font-family: var(--mono);
   font-size: 0.9375rem;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: var(--text);
 }
@@ -27,7 +27,7 @@
 .metric__bar {
   grid-column: 1 / -1;
   height: 4px;
-  border-radius: 2px;
+  border-radius: var(--r-pill);
   background: var(--track);
   overflow: hidden;
 }
@@ -36,30 +36,45 @@
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--accent);
+  background: var(--grad);
   transform-origin: left;
   transform: scaleX(var(--v));
 }
 
-/* Animate the fill once its card/cell is shown (JS only; static otherwise). */
+/* Animate the fill once its card is shown (JS only; static otherwise). */
 .js .metric__fill {
   transform: scaleX(0);
-  transition: transform 0.7s var(--ease-out) 0.05s;
+  transition: transform 0.9s var(--ease-out) 0.15s;
 }
-.js .is-visible .metric__fill,
-.js .is-run .metric__fill {
+.js .is-visible .metric__fill {
   transform: scaleX(var(--v));
 }
 
 .metrics--large {
-  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.metrics--large .metric {
+  grid-template-columns: 1fr;
+  align-content: start;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 .metrics--large .metric__value {
-  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.5rem);
-  font-family: var(--sans);
-  font-weight: 500;
-  letter-spacing: -0.03em;
+  order: -1;
+  font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .metrics--large .metric__bar {
   height: 6px;
+  margin-top: 6px;
 }

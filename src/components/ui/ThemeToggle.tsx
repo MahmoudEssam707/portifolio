@@ -3,7 +3,7 @@ import Icon from "./Icon";
 
 type Theme = "dark" | "light";
 
-const THEME_COLOR: Record<Theme, string> = { dark: "#05070a", light: "#f6f6f3" };
+const THEME_COLOR: Record<Theme, string> = { dark: "#07080c", light: "#f7f7fb" };
 
 /** The pre-paint script in index.html sets the initial theme; this only toggles it. */
 export default function ThemeToggle() {

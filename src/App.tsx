@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import "@fontsource-variable/inter-tight/wght.css";
-import "@fontsource-variable/jetbrains-mono/wght.css";
+import "@fontsource-variable/geist/wght.css";
+import "@fontsource-variable/geist-mono/wght.css";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/utilities.css";
