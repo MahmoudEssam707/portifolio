@@ -1,4 +1,5 @@
-/* Design tokens. Dark is the default; [data-theme] is set pre-paint in index.html. */
+/* Design tokens. Dark values live on :root and light ones under [data-theme="light"].
+ * Light is the site default: index.html sets data-theme pre-paint (saved choice, else light). */
 :root {
   color-scheme: dark;
 

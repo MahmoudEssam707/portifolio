@@ -165,22 +165,28 @@
   box-shadow: 0 0 8px var(--accent-2);
 }
 .hero__chip--1 {
-  top: 12%;
+  top: 10%;
   left: -6%;
 }
 .hero__chip--2 {
-  top: 46%;
+  top: 34%;
   right: -7%;
-  animation-delay: -2s;
-}
-.hero__chip--2 .hero__chip-dot {
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent);
+  animation-delay: -1.5s;
 }
 .hero__chip--3 {
-  bottom: 9%;
-  left: 2%;
-  animation-delay: -4s;
+  bottom: 24%;
+  left: -4%;
+  animation-delay: -3s;
+}
+.hero__chip--4 {
+  bottom: 6%;
+  right: -3%;
+  animation-delay: -4.5s;
+}
+.hero__chip--2 .hero__chip-dot,
+.hero__chip--4 .hero__chip-dot {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
 }
 
 @keyframes float {
@@ -193,31 +199,27 @@
   }
 }
 
-/* ---- Stats ---- */
+/* ---- Stats ----
+ * Hairline dividers are the 1px grid gaps showing the border colour through,
+ * so any number of stats tiles cleanly. */
 .hero__stats {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
   margin-top: clamp(56px, 8vw, 96px);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  background: var(--surface);
+  background: var(--border);
   box-shadow: var(--shadow-card);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   overflow: hidden;
 }
 .hero__stat {
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
-  gap: 6px;
+  gap: 8px;
   padding: clamp(20px, 3vw, 28px);
-}
-.hero__stat:nth-child(odd) {
-  border-right: 1px solid var(--border);
-}
-.hero__stat:nth-child(-n + 2) {
-  border-bottom: 1px solid var(--border);
+  background: var(--bg-elev);
 }
 .hero__stat dd {
   font-size: clamp(1.875rem, 1.4rem + 1.8vw, 2.75rem);
@@ -234,12 +236,6 @@
 @media (min-width: 760px) {
   .hero__stats {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-  .hero__stat:nth-child(-n + 2) {
-    border-bottom: 0;
-  }
-  .hero__stat:not(:last-child) {
-    border-right: 1px solid var(--border);
   }
 }
 
@@ -258,6 +254,12 @@
     left: -2%;
   }
   .hero__chip--2 {
+    right: -2%;
+  }
+  .hero__chip--3 {
+    left: -2%;
+  }
+  .hero__chip--4 {
     right: -2%;
   }
 }

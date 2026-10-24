@@ -23,15 +23,15 @@ export const portfolio = {
   },
 
   hero: {
-    status: "Open to AI/ML roles & collaborations",
+    status: "Want to build AI systems that ship to production? Let's talk.",
     tagline: { text: "I build AI agents and ML systems", highlight: "that ship to production." },
     stats: [
-      { value: "86%", label: "of QC testing automated" },
-      { value: "8,600+", label: "docs in RAG search" },
-      { value: "70%", label: "faster report generation" },
-      { value: "2", label: "published papers" },
+      { value: "86%", label: "of the QC testing lifecycle automated" },
+      { value: "70%", label: "faster bilingual reports with multi-agent AI" },
+      { value: "83%", label: "smaller model via quantization" },
+      { value: "20", label: "AI tools & coding agents benchmarked" },
     ],
-    focus: ["Multi-Agent", "RAG", "MCP"],
+    focus: ["Fine-Tuning · LoRA", "Multi-Agent", "Quantization", "Applied AI Research"],
     intro:
       "AI engineer at eSpace in Alexandria. I train models, then do the less glamorous part: wiring them into real workflows and keeping them running in production.",
   },
