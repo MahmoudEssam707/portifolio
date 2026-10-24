@@ -1,34 +1,33 @@
+import type { CSSProperties } from "react";
 import { data } from "../data";
-import Cell from "../components/ui/Cell";
+import Section from "../components/ui/Section";
 import Tags from "../components/ui/Tags";
-import "./About.css";
 import "./Skills.css";
 
 export default function Skills() {
   return (
-    <Cell n={5} id="skills" code={'skills.groupby("area").tools.apply(list)'} title="Skills">
-      <table className="df skills">
-        <caption className="sr-only">Skills grouped by area</caption>
-        <thead>
-          <tr>
-            <th scope="col">area</th>
-            <th scope="col">tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.skills.map((skill) => (
-            <tr key={skill.area}>
-              <th scope="row">
-                {skill.area}
-                {skill.note ? <span className="skills__note">{skill.note}</span> : null}
-              </th>
-              <td>
-                <Tags items={skill.tools} label={`${skill.area} tools`} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </Cell>
+    <Section
+      id="skills"
+      eyebrow="Toolkit"
+      title="The stack I build with"
+      lead="From model training to agents, APIs and the infrastructure that keeps them running."
+    >
+      <ul className="skills">
+        {data.skills.map((skill, i) => (
+          <li
+            key={skill.area}
+            className="skill card reveal-up"
+            style={{ "--delay": `${(i % 3) * 0.05}s` } as CSSProperties}
+          >
+            <h3 className="skill__area">
+              {skill.area}
+              <span className="skill__count">{skill.tools.length}</span>
+            </h3>
+            {skill.note ? <p className="skill__note">{skill.note}</p> : null}
+            <Tags items={skill.tools} label={`${skill.area} tools`} />
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 }

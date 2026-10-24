@@ -21,10 +21,10 @@ export default class ErrorBoundary extends Component<Props, State> {
     }
     return (
       <section className="container" role="alert" style={{ padding: "calc(var(--nav-h) + 64px) 0 96px" }}>
-        <p className="mono-label">RuntimeError</p>
-        <h1 style={{ fontSize: "var(--fs-h2)", margin: "16px 0 24px" }}>This page failed to render.</h1>
-        <a className="btn" href="/">
-          Reload home
+        <p className="eyebrow">Something went wrong</p>
+        <h1 style={{ fontSize: "var(--fs-h2)", margin: "16px 0 24px" }}>This page failed to load.</h1>
+        <a className="btn btn--primary" href="/">
+          Back home
         </a>
       </section>
     );

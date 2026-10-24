@@ -2,6 +2,7 @@ import { data } from "../../data";
 import { scrollToTarget } from "../../lib/scroll";
 import useLocalTime from "../../hooks/useLocalTime";
 import Icon from "../ui/Icon";
+import Logo from "../ui/Logo";
 import "./Footer.css";
 
 export default function Footer() {
@@ -11,9 +12,15 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer__inner">
-        <p className="mono-label">
-          © {site.year} · Python 3 kernel · {person.location.split(",")[0]} <time>{time ?? "--:--"}</time>
-        </p>
+        <div className="footer__brand">
+          <Logo size={24} />
+          <p>
+            © {site.year} {person.name}
+            <span className="footer__meta">
+              {person.location.split(",")[0]} · <time>{time ?? "--:--"}</time>
+            </span>
+          </p>
+        </div>
 
         <ul className="footer__social">
           {contact.socials.map((social) => (

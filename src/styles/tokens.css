@@ -1,46 +1,49 @@
-/* Design tokens. Dark is the default; [data-theme] is set pre-paint in index.html. */
+/* Design tokens. Dark values live on :root and light ones under [data-theme="light"].
+ * Light is the site default: index.html sets data-theme pre-paint (saved choice, else light). */
 :root {
   color-scheme: dark;
 
-  --bg: #0b0d10;
-  --bg-elev: #12151a;          /* code input area */
-  --bg-hover: #161a20;
-  --border: rgba(255, 255, 255, 0.07);
-  --border-strong: rgba(255, 255, 255, 0.14);
-  --text: #eceef2;
-  --text-dim: #a3abb8;
-  --text-mute: #788192;
-  --accent: #7c86ff;
-  --accent-soft: #a5acff;
-  --on-accent: #0b0d10;
-  --track: rgba(255, 255, 255, 0.06);   /* metric bar track */
-  --nav-bg: rgba(11, 13, 16, 0.86);
-  --grain-opacity: 0.035;
+  --bg: #07080c;
+  --bg-elev: #0d0f15;          /* raised surfaces: cards, panels */
+  --bg-hover: #151821;
+  --surface: rgba(18, 21, 30, 0.62);   /* glass card fill */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --text: #f1f2f6;
+  --text-dim: #a4a9b8;
+  --text-mute: #7a8091;
+  --accent: #8b7cff;
+  --accent-soft: #b4aaff;
+  --accent-2: #3dd6f5;
+  --on-accent: #07080c;
+  --grad: linear-gradient(100deg, #a99bff 0%, #8b7cff 40%, #3dd6f5 100%);
+  --glow: rgba(139, 124, 255, 0.35);
+  --glow-2: rgba(61, 214, 245, 0.22);
+  --track: rgba(255, 255, 255, 0.07);   /* metric bar track */
+  --grid-line: rgba(255, 255, 255, 0.045);
+  --nav-bg: rgba(13, 15, 21, 0.72);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 40px -24px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 0 1px rgba(139, 124, 255, 0.35), 0 12px 40px -8px rgba(139, 124, 255, 0.45);
 
-  /* Python syntax colours for code cells */
-  --syn-kw: #c49bff;
-  --syn-fn: #7cc4ff;
-  --syn-str: #9be39b;
-  --syn-num: #ffb38a;
-  --syn-com: #7d8598;
-  --syn-op: #a3abb8;
-
-  --sans: "Inter Tight Variable", "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --sans: "Geist Variable", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono Variable", "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
 
   --fs-label: 0.75rem;
   --fs-small: 0.875rem;
   --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
-  --fs-lead: clamp(1.125rem, 1.02rem + 0.5vw, 1.375rem);
-  --fs-h3: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
-  --fs-h2: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  --fs-lead: clamp(1.0625rem, 1rem + 0.45vw, 1.3125rem);
+  --fs-h3: clamp(1.1875rem, 1.08rem + 0.5vw, 1.4375rem);
+  --fs-h2: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
 
   --container: 1200px;
   --gutter: clamp(16px, 4vw, 40px);
-  --prompt: 92px;               /* In [n]: column on desktop */
-  --cell-y: clamp(56px, 8vw, 104px);
-  --nav-h: 60px;
-  --radius: 6px;
+  --section-y: clamp(64px, 8vw, 104px);
+  --nav-h: 72px;
+
+  --r-sm: 8px;
+  --r: 14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
 
   --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -49,25 +52,25 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --bg: #fbfbf9;
-  --bg-elev: #f1f1ed;
-  --bg-hover: #ecece7;
-  --border: rgba(16, 18, 24, 0.09);
-  --border-strong: rgba(16, 18, 24, 0.18);
-  --text: #111318;
-  --text-dim: #4a515e;
-  --text-mute: #646b78;
-  --accent: #4f57e8;
-  --accent-soft: #3a42d1;
+  --bg: #f7f7fb;
+  --bg-elev: #ffffff;
+  --bg-hover: #eeeef5;
+  --surface: rgba(255, 255, 255, 0.78);
+  --border: rgba(20, 22, 40, 0.09);
+  --border-strong: rgba(20, 22, 40, 0.17);
+  --text: #0e0f16;
+  --text-dim: #4a4f60;
+  --text-mute: #666b7c;
+  --accent: #5b4bea;
+  --accent-soft: #4536d1;
+  --accent-2: #0891b2;
   --on-accent: #ffffff;
-  --track: rgba(16, 18, 24, 0.07);
-  --nav-bg: rgba(251, 251, 249, 0.88);
-  --grain-opacity: 0.02;
-
-  --syn-kw: #8a3fd1;
-  --syn-fn: #1f6fd1;
-  --syn-str: #1d8a3a;
-  --syn-num: #c2510f;
-  --syn-com: #6c727e;
-  --syn-op: #4a515e;
+  --grad: linear-gradient(100deg, #6d5cf2 0%, #5b4bea 40%, #0891b2 100%);
+  --glow: rgba(91, 75, 234, 0.18);
+  --glow-2: rgba(8, 145, 178, 0.12);
+  --track: rgba(20, 22, 40, 0.08);
+  --grid-line: rgba(20, 22, 40, 0.05);
+  --nav-bg: rgba(255, 255, 255, 0.75);
+  --shadow-card: 0 1px 2px rgba(20, 22, 40, 0.04), 0 16px 32px -20px rgba(20, 22, 40, 0.18);
+  --shadow-glow: 0 0 0 1px rgba(91, 75, 234, 0.3), 0 12px 32px -10px rgba(91, 75, 234, 0.35);
 }

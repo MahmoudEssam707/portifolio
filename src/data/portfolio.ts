@@ -14,15 +14,24 @@ export const portfolio = {
     timeZone: "Africa/Cairo",
     cv: "https://drive.google.com/file/d/1epQFI1O36eSC0BaDiZbNu5IvdpRXHh3q/view?usp=sharing",
     photo: {
-      // Re-fetched from GitHub on every build (scripts/prerender.mjs);
-      // public/photo.jpg is the fallback if GitHub can't be reached.
+      // Local 920px photo (2x super-resolution of the 460px GitHub avatar) so it
+      // stays sharp on high-DPI screens. Not synced from GitHub: that would
+      // overwrite it with the 460px version on every build.
       src: "/photo.jpg",
-      github: "MahmoudEssam707",
-      size: 500,
+      size: 920,
     },
   },
 
   hero: {
+    status: "Want to build AI systems that ship to production? Let's talk.",
+    tagline: { text: "I build AI agents and ML systems", highlight: "that ship to production." },
+    stats: [
+      { value: "86%", label: "of the QC testing lifecycle automated" },
+      { value: "70%", label: "faster bilingual reports with multi-agent AI" },
+      { value: "83%", label: "smaller model via quantization" },
+      { value: "20", label: "AI tools & coding agents benchmarked" },
+    ],
+    focus: ["Fine-Tuning · LoRA", "Multi-Agent", "Quantization", "Applied AI Research"],
     intro:
       "AI engineer at eSpace in Alexandria. I train models, then do the less glamorous part: wiring them into real workflows and keeping them running in production.",
   },
@@ -50,7 +59,7 @@ export const portfolio = {
       summary:
         "End-to-end AI solutions in the ATSO team, from multi-agent systems and RAG search to internal AI tooling and fine-tuned models.",
       highlights: [
-        "Developed an AI Quality Control assistant that automated the lifecycle process by 86% and saved 96+, decreasing its weight from 30% to 10%.",
+        "Developed an AI Quality Control assistant that automated 86% of the QC Life Cycle Testing Process, cutting its weight from 30% to 10%.",
         "Designed a parallel multi-agent document-generation system with output guardrails, enabling bilingual (Arabic/English) report generation 70% faster.",
         "Engineered enterprise-grade hybrid RAG search pipelines across 8,600+ documents, using pgvector, vector embeddings and re-ranking.",
         "Created an internal AI marketplace for our Agentic SDLC, where 6 tools and 2 MCP servers were deployed to give agents secure access to internal platforms.",

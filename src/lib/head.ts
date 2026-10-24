@@ -44,7 +44,7 @@ export function buildHead(meta: RouteMeta) {
     tags.push(`<link rel="canonical" href="${url}" />`, `<meta property="og:url" content="${url}" />`);
   }
   if (meta.path === "/") {
-    // The hero network draws the portrait; fetch it alongside the HTML.
+    // The hero portrait is above the fold; fetch it alongside the HTML.
     tags.push(`<link rel="preload" href="${person.photo.src}" as="image" />`);
     // "<" is escaped so the JSON can never close the script tag early.
     const json = JSON.stringify(personJsonLd()).replace(/</g, "\\u003c");

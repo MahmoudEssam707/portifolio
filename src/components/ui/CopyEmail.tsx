@@ -40,7 +40,7 @@ export default function CopyEmail({ email }: { email: string }) {
   return (
     <button type="button" className="btn copy-email" onClick={onClick}>
       <Icon name={status === "copied" ? "check" : "copy"} size={16} />
-      {status === "copied" ? "copied" : "copy"}
+      {status === "copied" ? "Copied" : "Copy"}
       <span className="sr-only" aria-live="polite">
         {status === "copied" ? "Email copied to clipboard" : status === "failed" ? "Copy failed" : ""}
       </span>

@@ -3,8 +3,9 @@ import type { Metric } from "../../data";
 import "./Metrics.css";
 
 /**
- * An evaluation report: one row per metric, with a 0–100 bar when the metric
- * has a value. Bars fill when an ancestor gets `.is-visible` / `.is-run`.
+ * Reported results: one row (or, when `large`, one stat tile) per metric, with
+ * a 0–100 bar when the metric has a value. Bars fill when an ancestor gets
+ * `.is-visible`.
  */
 export default function Metrics({ metrics, large = false }: { metrics: Metric[]; large?: boolean }) {
   return (
